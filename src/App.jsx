@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 
 const ENDPOINT_STORAGE_KEY = "daylight.mockapi.endpoint";
+const DEFAULT_ENDPOINT = "https://6b03eeb49e7cafb37dbfa9aa.mockapi.io/api/v1/todos";
 
 function normalizeEndpoint(value) {
   const parsed = new URL(value.trim());
@@ -85,7 +86,9 @@ function TaskRow({ task, busy, onToggle, onEdit, onDelete }) {
 }
 
 function App() {
-  const [endpoint, setEndpoint] = useState(() => localStorage.getItem(ENDPOINT_STORAGE_KEY) || "");
+  const [endpoint, setEndpoint] = useState(
+    () => localStorage.getItem(ENDPOINT_STORAGE_KEY) || DEFAULT_ENDPOINT
+  );
   const [tasks, setTasks] = useState([]);
   const [filter, setFilter] = useState("all");
   const [loading, setLoading] = useState(true);
